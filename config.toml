@@ -1,5 +1,5 @@
 ############################ Default configuration #########################
-baseURL = "https://richinsql.netlify.app/"
+baseURL = "https://richinsql.com/"
 # site title 
 title = "Rich In SQL | SQL Server Developer & Data Wrangler"
 # theme
