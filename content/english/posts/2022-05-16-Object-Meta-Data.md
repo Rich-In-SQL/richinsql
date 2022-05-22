@@ -22,7 +22,17 @@ CREATE TABLE dbo.Customers
     ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     Customer_Name nvarchar(50),
     Credit_Available INT
-)
+);
+
+INSERT INTO dbo.Customers (Customer_Name,Credit_Available,Code)
+VALUES
+('John Jones',1,001),
+('Lucy Davies',0,002),
+('Brian Williams',1,003),
+('Dave Somerset',0,004),
+('Ruby Hughes',1,005),
+('Jane Silver',0,006)
+
 ```
 
 Now we need to create view to reference that table 
@@ -31,8 +41,8 @@ Now we need to create view to reference that table
 CREATE VIEW dbo.vw_Customers
 AS
 SELECT
-    ID
-    Customer_Name
+    ID,
+    Customer_Name,
     Credit_Available
 FROM dbo.Customers
 ```
@@ -40,13 +50,14 @@ FROM dbo.Customers
 We now need a staging table that our stored procedure is going to insert the customer data into every day.
 
 ```
-CREATE TABLE dbo.Customers
+CREATE TABLE dbo.Customers_Audit
 (
     ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     CensusDate DATE,
     Customer_Name nvarchar(50),
     Credit_Available INT
 )
+
 ```
 
 Finally the store procedure to bring all of this together
@@ -56,8 +67,8 @@ CREATE PROCEDURE dbo.sp_Customers_Audit
 
 AS
 
+INSERT INTO dbo.Customers_Audit (Customer_Name,Credit_Available)
 SELECT 
-    ID,
     Customer_Name,
     Credit_Available
 FROM dbo.vw_Customers
