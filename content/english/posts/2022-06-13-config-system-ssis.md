@@ -79,14 +79,16 @@ Let's break this down.
 First, we need a couple of variables to store the configuration we receive from SQL
 
 | Variable Name  | Variable Data Type  | Variable Desciption
-|---|---|
-| ConfigName  |  String | Reference to the package in dbo.Package |
-|  ConfigValue | String  | Reference to the package in dbo.Package |
-|  Configurations | System.Object  | Reference to the package in dbo.Package |
+|---|---|---|
+| ConfigName  |  String | The name of the configuration item in SQL prefixed with Confg_ |
+|  ConfigValue | String  | The value of the configuration item |
+|  Configurations | System.Object  | An object to store the results from the query |
 
 ### Get Config 
 
 Bring an *Execute SQL Task* event onto the canvas and double click it 
+
+![](/img/ssis-execute-sql-task.png)
 
 ![](/img/ssis-config-2.png)
 
@@ -128,9 +130,11 @@ In the ResultName type a name for the results "Configurations" works, then selec
 
 Bring a script task onto the canvas and double click it 
 
+![](/img/ssis-script-task.png)
+
 ![](/img/ssis-config-8.png)
 
-Click the Edit Script button
+Click the **Edit Script** button
 
 Inside the Main method we need to put the following code, this is going to clear any of the configuration items so they are ready for use in the event they had already been populated.
 
@@ -155,11 +159,13 @@ In the read write variables box add;
 * User::ConfigValue 
 * User::Configurations
 
-Click ok once that is done.
+Click **OK** once that is done.
 
 ### Set Config Values
 
 Drag a **Foreach loop container** onto the canvas and double click it 
+
+![](/img/ssis-foreach-loop.png)
 
 ![](/img/ssis-config-9.png)
 
