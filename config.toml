@@ -1,5 +1,5 @@
 ############################ Default configuration #########################
-baseURL = "https://richinsql.com"
+baseURL = "https://richinsql.com/"
 # site title 
 title = "Rich In SQL | SQL Server Developer & Data Wrangler"
 # theme
@@ -127,9 +127,9 @@ attributes = "crossorigin='anonymous'"
 
 
 ############################## Social Site ##########################
-[[params.social]]
-icon = "fab fa-twitter" # Fontawesome icon pack https://fontawesome.com/icons
-link = "https://www.twitter.com/richinsql"
+#[[params.social]]
+#icon = "fab fa-twitter" # Fontawesome icon pack https://fontawesome.com/icons
+#link = "https://www.twitter.com/richinsql"
 [[params.social]]
 icon = "fab fa-github" # Fontawesome icon pack https://fontawesome.com/icons
 link = "https://www.github.com/richinsql"
