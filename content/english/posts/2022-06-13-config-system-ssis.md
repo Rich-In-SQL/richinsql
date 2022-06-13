@@ -1,13 +1,13 @@
 ---
 title: Creating a configuration system for SSIS
-date: 2022-06-13T09:00:00.000+01:00
+date: 2022-06-13T08:00:00.000+01:00
 image: "/images/post/apple-health-powerBi-dashboard.jpg"
 author: Rich
 layout: post
 categories:
 - sqlserver
 - ssis
-draft: true
+draft: false
 tags:
 - SQLServer
 - T-SQL
@@ -15,11 +15,22 @@ tags:
 - Advanced
 ---
 
+Do you have a complicated SSIS package that has steps which include configuration where things could change? File locations or rundates that need to be updated regularly and often face a whole world of pain when the infrastructure team adjust something because then you have to update every config reference in your package? 
 
-First we are going to need a database, if you already have a database where configuration is kept use that otherwise, let's create one
+Let's have a look at how we can use SQL Server to hold the configuration for us and SSIS bring it out at run time. 
+
+**Note:** An assumption has been made that you know how to create a **Connection Manager** to point to your new database.
+
+First we are going to need a database, if you already have a database where configuration is kept use that otherwise, let's create one;
 
 ```
-CREATE DATABASE dbo.Package
+CREATE DATABASE SSISConfig;
+```
+
+Next let's create some tables in this database to hold our config
+
+```
+CREATE TABLE dbo.Package
 (
 	PackageID INT IDENTITY(1,1) NOT NULL,
 	PackageName varchar(100),
@@ -46,7 +57,7 @@ ALTER TABLE dbo.Package ADD CONSTRAINT PK_Package_PackageID PRIMARY KEY (Package
 Now we need a table to store the configuration for this package, because each package can have multiple configurations we are going to create a new table to hold that information 
 
 ```
-CREATE DATABASE dbo.PackageConfig
+CREATE TABLE dbo.PackageConfig
 (
 	[PackageID] INT NOT NULL,
 	[ConfigName] varchar(50) NOT NULL
@@ -78,7 +89,7 @@ Let's break this down.
 
 First, we need a couple of variables to store the configuration we receive from SQL
 
-| Variable Name  | Variable Data Type  | Variable Desciption
+| Variable Name  | Variable Data Type  | Variable Description
 |---|---|---|
 | ConfigName  |  String | The name of the configuration item in SQL prefixed with Confg_ |
 |  ConfigValue | String  | The value of the configuration item |
@@ -86,15 +97,15 @@ First, we need a couple of variables to store the configuration we receive from 
 
 ### Get Config 
 
-Bring an *Execute SQL Task* event onto the canvas and double click it 
+Bring an **Execute SQL Task** event onto the canvas and double click it 
 
 ![](/img/ssis-execute-sql-task.png)
 
+Once open set the result set to **Full Result Set** because we want to store the results from the query into the Configurations variable object we created earlier.
+
 ![](/img/ssis-config-2.png)
 
-Set the result set to **Full Result Set** becuase we want to store the results from the query into the object we created earlier.
-
-Click in the SQL Statement box and add the following code
+Click in the **SQL Statement** box and add the following code
 
 ```
 SELECT 
@@ -122,9 +133,15 @@ In the ResultName type a name for the results "Configurations" works, then selec
 
 ![](/img/ssis-config-5.png)
 
+Click Parameter Mappings from the sidebar 
+
 ![](/img/ssis-config-6.png)
 
+Click Add, and add in the System::PackageID as shown below
+
 ![](/img/ssis-config-7.png)
+
+Once that is all done, click OK.
 
 ### Clear Config Values
 
@@ -169,13 +186,25 @@ Drag a **Foreach loop container** onto the canvas and double click it
 
 ![](/img/ssis-config-9.png)
 
+Set the Enumerator to **Foreach ADO Enumerator** in the ADO object source variable drop down select User::Configurations and make sure **Rows in first table** is selected
+
 ![](/img/ssis-config-10.png)
+
+Click the variable mappings from the side bar 
 
 ![](/img/ssis-config-11.png)
 
+Add the following variables
+
 ![](/img/ssis-config-12.png)
 
-Now that the Foreach loop is setup, drag a script task inside it once it is there, double click it and click Edit Script
+Once done, click OK.
+
+Now that the Foreach loop is setup, drag a script task inside it and name it **Set Config**
+
+![](/img/ssis-config-16.png)
+
+Once it is there, double click it and click Edit Script
 
 ![](/img/ssis-config-8.png)
 
@@ -191,30 +220,43 @@ if(Dts.Variables.Contains("confg_" + configName))
 }
 ```
 
-### Adding Configuration Items 
+### Adding a package to SQL
 
-In SQL we can do this by inserting values into the PackageConfig table 
+Right click on the SSIS canvas in an empty space and select properties, this should open a new pane which looks like this;
+
+![](/img/ssis-config-17.png)
+
+Copy the ID without the `{ }` we need that in a moment. 
+
+```
+INSERT INTO dbo.Package ([PackageName],[PackageGUID],[Description])
+VALUES
+('Your Package Name','The Package GUID we selected above','A Description)
+```
+
+### Adding Configuration Items
+
+Now we want to add the configuration items that are going to be used by this SSIS package, we can do this first in SQL by inserting values into the PackageConfig table like this;
 
 ```
 INSERT INTO dbo.PackageConfig (PackageID, ConfigName, ConfigValue)
 VALUES
 (1,'RunDate','20220612')
 ```
-
 PackageID will be the ID of the package you are setting the configuration for, this is obtained from dbo.Package.
 
-Now that we have created a value in PackageConfig called run date we need to add that into SSIS
+Now that we have created a value in PackageConfig called rundate we need to add that into SSIS.
 
 ![](/img/ssis-config-13.png)
 
 All configuration items that are obtained from SQL are prefixed with **Confg_** but you don't need to add the prefix to the ConfigName in SQL itself.
 
-Now we just need to add the new configurations to the Clear Configuration block & Set Configuration blocks
+Now we just need to add the new configurations to the Clear Configuration block & Set Configuration blocks.
 
-The Clear configuration block should now look like this 
+The Clear configuration block should now look like this; 
 
 ![](/img/ssis-config-14.png)
 
-This Set Configuration Block should now look like this 
+This Set Configuration Block should now look like this; 
 
 ![](/img/ssis-config-15.png)
