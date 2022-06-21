@@ -16,6 +16,9 @@ googleAnalytics = "G-J8VFMSWF6B" # example: UA-123-45, for more info, read the a
 # disable language
 disableLanguages = ["fr"] # desable language from here
 
+[permalinks]
+  posts = '/:year/:month/:title/'
+
 [outputs]
 home = ["HTML", "AMP", "FEED" ,"RSS", "JSON"]
 [markup.goldmark.renderer]
