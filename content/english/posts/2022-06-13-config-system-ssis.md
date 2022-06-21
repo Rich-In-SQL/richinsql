@@ -1,7 +1,6 @@
 ---
 title: Creating a configuration system for SSIS
 date: 2022-06-13T08:00:00.000+01:00
-image: "/images/post/apple-health-powerBi-dashboard.jpg"
 author: Rich
 layout: post
 categories:
