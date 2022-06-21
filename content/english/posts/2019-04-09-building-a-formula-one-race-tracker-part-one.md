@@ -1,5 +1,5 @@
 ---
-title: 'Building a Formula One Race Tracker &#8211; Part One'
+title: 'Building a Formula One Race Tracker - Part One'
 date: 2019-04-09T16:00:06+01:00
 author: Rich
 layout: post

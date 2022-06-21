@@ -1,5 +1,5 @@
 ---
-title: 'CHAR(10) &#038; CHAR(13) in SQL Server Columns'
+title: 'CHAR(10) & CHAR(13) in SQL Server Columns'
 date: 2019-05-02T16:00:47+01:00
 author: Rich
 layout: post
