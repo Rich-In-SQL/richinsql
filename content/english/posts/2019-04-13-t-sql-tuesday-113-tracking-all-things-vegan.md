@@ -1,5 +1,5 @@
 ---
-title: 'T-SQL Tuesday #113 &#8211; Tracking All Things Vegan'
+title: 'T-SQL Tuesday #113 - Tracking All Things Vegan'
 date: 2019-04-13T08:30:42+01:00
 author: Rich
 layout: post

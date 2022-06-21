@@ -1,5 +1,5 @@
 ---
-title: 'Directory Searcher &#038; Ambiguous Name Resoloution'
+title: 'Directory Searcher & Ambiguous Name Resoloution'
 date: 2018-09-08T12:12:57+01:00
 author: Rich
 layout: post

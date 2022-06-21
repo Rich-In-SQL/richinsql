@@ -1,5 +1,5 @@
 ---
-title: 'How I Got Here &#038; Where I am Going'
+title: 'How I Got Here & Where I am Going'
 date: 2018-08-28T17:55:31+01:00
 author: Rich
 layout: post
