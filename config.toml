@@ -195,7 +195,7 @@ enable = false
 
 ######################## Discord ###############################
 [params.discord]
-enable = false
+enable = true
 
 ######################## Tinyletter ###############################
 [params.tinyletter]
