@@ -7,7 +7,7 @@ assignees: RichInSQL
 
 ---
 
-** Proposed title for this post**
+**Proposed title for this post**
 
 **Proposed date this post should go live**
 DD-MM-YYYY
