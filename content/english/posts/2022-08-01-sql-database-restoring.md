@@ -5,7 +5,7 @@ author: Rich
 layout: post
 categories:
 - sqlserver
-draft: true
+draft: false
 tags:
 - SQLServer
 - T-SQL
