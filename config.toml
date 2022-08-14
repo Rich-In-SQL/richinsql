@@ -135,7 +135,7 @@ attributes = "crossorigin='anonymous'"
 #link = "https://www.twitter.com/richinsql"
 [[params.social]]
 icon = "fab fa-github" # Fontawesome icon pack https://fontawesome.com/icons
-link = "https://www.github.com/richinsql"
+link = "https://www.github.com/rich-in-sql"
 [[params.social]]
 icon = "fas fa-coffee" # Fontawesome icon pack https://fontawesome.com/icons
 link = "https://www.ko-fi.com/richinsql"
@@ -177,7 +177,7 @@ icon = "fab fa-twitter" # Fontawesome icon pack https://fontawesome.com/icons
 link = "https://www.twitter.com/richinsql"
 [[params.social_profile]]
 icon = "fab fa-github" # Fontawesome icon pack https://fontawesome.com/icons
-link = "https://www.github.com/richinsql"
+link = "https://www.github.com/rich-in-sql"
 #[[params.social_profile]]
 #icon = "fab fa-instagram" # Fontawesome icon pack https://fontawesome.com/icons
 #link = "https://www.instagram.com/richinsql_"

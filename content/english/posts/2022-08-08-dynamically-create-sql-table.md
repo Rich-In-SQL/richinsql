@@ -19,6 +19,7 @@ In this post, we are going to look at how we can use dynamic SQL to build a tabl
 
 We are going to make use of the Information Schema, this is specific to each database, in this example, all of the table we want to target are within the same StackOverflow database. If you would like to find out more about getting information from the Information Schema we wrote a post on that [here](/2022/04/using-sql-servers-information-schema).
 
+
 ```
 SELECT 
 	COLUMN_NAME 

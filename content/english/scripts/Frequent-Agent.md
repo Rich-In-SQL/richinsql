@@ -7,7 +7,7 @@ weight: 1
 categories: ["sqlserver"]
 
 thumbnail: "images/scripts/frequent-agent.png"
-tools_github: "https://github.com/RichInSQL/Frequent-Agent"
+tools_github: "https://github.com/Rich-In-SQL/Frequent-Agent"
 
 tools_info:
 - title: "Types :"
