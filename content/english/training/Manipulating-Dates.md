@@ -9,8 +9,8 @@ categories: ["sqlserver"]
 
 thumbnail: "images/tools/Manipulating Dates In Microsoft SQL Server.png"
 tools_video_link: "https://youtu.be/yRzeTQdLaIA"
-tools_slidedeck_link: "https://github.com/RichInSQL/Training/tree/main/001%20-%20Manipulating%20Dates%20In%20Microsoft%20SQL%20Server"
-tools_demoscripts_link: "https://github.com/RichInSQL/Training/tree/main/001%20-%20Manipulating%20Dates%20In%20Microsoft%20SQL%20Server/Demo%20Scripts"
+tools_slidedeck_link: "https://github.com/Rich-In-SQL/Training/tree/main/001%20-%20Manipulating%20Dates%20In%20Microsoft%20SQL%20Server"
+tools_demoscripts_link: "https://github.com/Rich-In-SQL/Training/tree/main/001%20-%20Manipulating%20Dates%20In%20Microsoft%20SQL%20Server/Demo%20Scripts"
 
 tools_info:
 - title: "Types :"
