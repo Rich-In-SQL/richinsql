@@ -29,7 +29,7 @@ EXEC p_BuildCalendarTable @StartDate = '1999', @EndDate = '2040'
 
 This is also built specifically for the United Kingdom so holidays would be different depending on your region and working days might be different for your use case depending on if you class a Saturday/Sunday as a working day.
 
-Here is the code, I also have it on my [Github](https://github.com/RichInSQL/SQL-Calendar), which is where you can find the latest version, should I change anything. 
+Here is the code, I also have it on my [Github](https://github.com/rich-howell/SQL-Calendar), which is where you can find the latest version, should I change anything. 
 
 **DISCLAIMER** WHILE A LARGE PORTION OF THIS CODE IS MINE THE MAJORITY OF IT WAS TAKEN FROM [HERE](https://stackoverflow.com/questions/5635594/how-to-create-a-calendar-table-for-100-years-in-sql) I HAVE AMENDED IT TO SUIT MY NEEDS AND WRAPPED IT IN A STORED PROCEDURE.
 

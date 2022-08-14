@@ -8,7 +8,7 @@ weight: 1
 categories: ["powerbi"]
 
 thumbnail: "images/tools/f1-dash.jpg"
-tools_website_link: "https://github.com/RichInSQL/FormulaOneDashboard"
+tools_website_link: "https://github.com/rich-howell/FormulaOneDashboard"
 
 tools_info:
 - title: "Types :"

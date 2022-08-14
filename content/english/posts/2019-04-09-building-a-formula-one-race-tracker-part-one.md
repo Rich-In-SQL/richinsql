@@ -24,7 +24,7 @@ tags:
 
 <span style="font-weight: 400;">As we are going to be building a C# web application, there are a few things we will need before we get started;</span>
 
-_**Note:**_ This project is available in full over on [Git Hub](https://github.com/RichInSQL/Formula1RaceTracker)
+_**Note:**_ This project is available in full over on [Git Hub](https://github.com/rich-howell/Formula1RaceTracker)
 
 **Microsoft SQL Server**
 

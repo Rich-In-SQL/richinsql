@@ -7,7 +7,7 @@ weight: 1
 categories: ["sqlserver"]
 
 thumbnail: "images/scripts/availability-agent.png"
-tools_github: "https://github.com/RichInSQL/Availability-Agent"
+tools_github: "https://github.com/Rich-In-SQL/Availability-Agent"
 
 tools_info:
 - title: "Types :"

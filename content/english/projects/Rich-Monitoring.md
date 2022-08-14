@@ -8,7 +8,7 @@ weight: 2
 categories: ["SQL Server"]
 
 thumbnail: "images/tools/f1-db.jpg"
-tools_website_link: "https://github.com/RichInSQL/RichMonitoring"
+tools_website_link: "https://github.com/Rich-In-SQL/RichMonitoring"
 
 tools_info:
 - title: "Types :"
@@ -104,5 +104,5 @@ Sure, RichMonitoring has a RunLog, you can query this to see what was run when, 
 RichMonitoring comes as is for all non RichInSQL Clients, if you find a problem with RichMonitoring or it doesn't do something you wish it did, you have a few options available to you;
 
 -  Get help on our [forum](https://forum.richinsql.com)
--  Open a Issue on [GitHub](https://github.com/RichInSQL/RichMonitoring/issues)
+-  Open a Issue on [GitHub](https://github.com/Rich-In-SQL/RichMonitoring/issues)
 -  Fork the Repo, Fix the issue and open a pull request so we can improve RichMonitoring for others.

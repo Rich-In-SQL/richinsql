@@ -8,7 +8,7 @@ weight: 2
 categories: ["SQL Server"]
 
 thumbnail: "images/tools/f1-db.jpg"
-tools_website_link: "https://github.com/RichInSQL/FormulaOneDatabase"
+tools_website_link: "https://github.com/rich-howell/FormulaOneDatabase"
 
 tools_info:
 - title: "Types :"
@@ -144,7 +144,7 @@ Let me introduce, the un-official Formula One Database.
 
 ### Found An Issue?
 
-If you have found an issue with the data, something isn't quite right or I have made a mistake during the import, feel free to [open an Issue](https://github.com/RichInSQL/FormulaOneDatabase/issues) on the [GitHub repo](https://github.com/RichInSQL/FormulaOneDatabase). 
+If you have found an issue with the data, something isn't quite right or I have made a mistake during the import, feel free to [open an Issue](https://github.com/rich-howell/FormulaOneDatabase/issues) on the [GitHub repo](https://github.com/rich-howell/FormulaOneDatabase). 
 
 If you would like to fix the issue yourself, I would also encourage you to create a pull request, the repo is public and a pull request would really help take this project forward. 
 
@@ -154,7 +154,7 @@ If you would like to make a suggested change to the database, be that the schema
 
 ### This Sounds Cool, Where Can I Get It?
 
-If you would like to create the database on your own instance of SQL Server you can download the installtion script from the [GitHub repo](https://github.com/RichInSQL/FormulaOneDatabase) and run it on your SQL Server Instance.
+If you would like to create the database on your own instance of SQL Server you can download the installation script from the [GitHub repo](https://github.com/rich-howell/FormulaOneDatabase) and run it on your SQL Server Instance.
 
 ### Do you have some example scripts?
 
