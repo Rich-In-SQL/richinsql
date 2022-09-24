@@ -8,7 +8,7 @@ weight: 2
 categories: ["SQL Server"]
 
 thumbnail: "images/tools/f1-db.jpg"
-tools_website_link: "https://github.com/rich-howell/FormulaOneDatabase"
+tools_website_link: "https://github.com/Rich-In-SQL/RichInF1"
 
 tools_info:
 - title: "Types :"
@@ -17,145 +17,280 @@ tools_info:
 #  content: "Blue, Purple, White, Orange"
 ---
 
-Do you have an interest in Formula One? Do you need a database for T-SQL demonstrations or testing of your T-SQL code that is open source and not the adventure works database? I might just have the answer, I have put together using freely available data a database for just that.
+# Formula One Database
+The Formula One database is developed and maintained for education and demonstration purposes using open source Formula One Data. 
 
-There are not massive amounts of rows in this dataset so it won't be good for performance testing but learning to write T-SQL and following along with some of my posts - it will be perfect.
+* Open Source
+* Free
+ ## Source Of Data
 
-Let me introduce, the un-official Formula One Database.
+Data used in this project was obtained from the [Ergast database image project](https://ergast.com/mrd/db/). 
 
-### What Is Included 
+**12/09/2022** - This includes data from the 2022 Italian GP.
 
-**A table holding a list of all the drivers and their details**
-* Drivers 
-  - DriverID **PK**
-  - Nationality
-  - Races Entered
-  - Races Started
-  - Pole Positions
-  - Race Wins
-  - Podiums
-  - Fastest Laps
-  - Total Points
+If any data is missing or incorrect please submit an issue and it can be updated or feel free to submit a pull request.
 
-**A table that holds a list of Drivers and the seasons they raced**
-* Driver Seasons
-  - DriverID **FK (Drivers)**
-  - SeasonRefID **FK**
+## Getting Started
 
-**A table that holds which driver was the champion for which season**
-* Driver Championships
-  - DriverID **FK (Drivers)**
-  - SeasonRefID **FK (Seasons)**
+First, you are going to need to clone the repo.
 
-**The standing of each driver for each season**
-* Driver Standings
-  - DriverID **FK (Drivers)**
-  - SeasonRefID **FK (Seasons)**
-  - Points
+`git clone https://github.com/RichInSQL/RichInF1.git`
 
-**List of each constructor and the details of them constructors**
-* Constructors
-  - ConstructorID **PK**
-  - Country Licensed
-  - Races Entered
-  - Races Started
-  - Drivers
-  - Total Entries
-  - Wins
-  - Points
-  - Poles
-  - Fastest Laps
-  - Podiums
-  - Constructor Championships Won
-  - Driver Championships Won
+Alternatively you can download the latest release. 
 
-**A list of all the constructors and the seasons they were active**
-* Constructor Seasons
-  - ConstructorID **FK (Constructors)**
-  - SeasonRefID **FK (Seasons)**
+Once you have the repo cloned or the release downloaded, open up a PowerShell terminal and navigate to the location you cloned the repo to 
 
-**Each constructor has a registered nationality, this table holds each constructor and the nationality they are registered in**
-* Constructor Nationality
-  - ConstructorID **FK (Constructors)**
-  - CountryID **FK (Countrys)**
+`cd D:\your\location`
 
-**This table holds the points for each constructor for each season (currently just 2021) with positions in the championship**
-* Constructor Standings 
-  - ConstructorID **FK (Constructors)**
-  - SeasonRefID **FK (Seasons)**
-  - Points
+You can then execute the script
 
-**Each circuit and the details of that circuit**
-* Circuits
-  - CircuitID **PK**
-   - Circuit
-   - Grand Prix
-   - TypeRefID **FK (CircuitTypes)**
-   - DirectionRefID **FK (Directions)**
-   - LastLengthUsed
-   - GrandPrixHeld
+`.\build_database.ps1`
 
-**A list of all circuit locations, the CountryID is provided along with the Geographical Longitude & Latitude**
-* Circuits Location
-  - CircuitID
-  - CountryID **FK (Countrys)**
-  - Longitude
-  - Latitude
+The following parameters need to be set;
 
-**Each circuit has a map of the layout, this table holds all of them images, hosted off database**
-* Circuit Images
-  - CircuitID **FK (Circuits)**
-  - ImageURL
+* -sqlInstance - The SQL Server Instance you would like the script executed against
+* -databaseName - The database name you would like created
 
-**Each circuit and the season they participated**
-* Circuit Seasons
-  - CircuitID **FK (Circuits)**
-  - SeasonRefID **FK (Seasons)**
+Once all of the parameters are set, you should have something that looks like this **Running the script will drop the database if it already exists**
 
-**The type of each circuit**
-* Circuit Type
-  - CircuitID **FK (Circuits)**
-  - TypeRefID **FK (CircuitTypes)**  
+`.\build_database.ps1 -sqlInstance localhost -databaseName f1db`
 
-**Each circuit can be clockwise or anti-clockwise direction for race day this table holds them directions for reference in the Circuits Table**  
-* Circuit Directions
-  - CircuitID **FK (Circuits)**
-  - DirectionRefID **FK (Directions)**
-  - Type
-    - Street circuit
-    - Road circuit
-    - Street circuit
-    - Race circuit
+The script will output it's progress and any error's along the way...once complete, you should have a working copy of the Ergast Formula one dataset inside Microsoft SQL Server.
 
-  **Reference table for seasons used in parent tables**
-* Seasons
-  - SeasonID
-  - SeasonRefID **PK**
-  - Season
-    - 1950 - 2023 
+## Example Queries
 
-  **Reference table for countries used in parent tables**
-* Country
-  - CountryID
-  - CountryRefID **PK**
-  - Country
+Example queries that you can run against the dataset are provided in the `example_queries` folder within the repo.
 
-### Database Diagram
+If you would like to contribute to building a collection of queries for this dataset, please open a Pull Request.
 
-### Found An Issue?
+## Database Relationship Diagram
 
-If you have found an issue with the data, something isn't quite right or I have made a mistake during the import, feel free to [open an Issue](https://github.com/rich-howell/FormulaOneDatabase/issues) on the [GitHub repo](https://github.com/rich-howell/FormulaOneDatabase). 
+![DatabaseDiagram](/images/ergast_db.png)
+*This image is provided by Ergast and is published here for continuity*
 
-If you would like to fix the issue yourself, I would also encourage you to create a pull request, the repo is public and a pull request would really help take this project forward. 
+## Database Documentation
 
-### Pull Requests 
+This documentation is taken from [https://ergast.com/docs/f1db_user_guide.txt](https://ergast.com/docs/f1db_user_guide.txt) and placed here for reference, it has been modified to match the Microsoft SQL Server definitions.
 
-If you would like to make a suggested change to the database, be that the schema or the data itself you can submit a pull request which I can then review and merge into the Main branch once tested. 
 
-### This Sounds Cool, Where Can I Get It?
+| List of Tables       |
+|----------------------|
+| circuits             |
+| constructorResults   |
+| constructorStandings |
+| constructors         |
+| driverStandings      |
+| drivers              |
+| lapTimes             |
+| pitStops             |
+| qualifying           |
+| races                |
+| results              |
+| seasons              |
+| status               |
 
-If you would like to create the database on your own instance of SQL Server you can download the installation script from the [GitHub repo](https://github.com/rich-howell/FormulaOneDatabase) and run it on your SQL Server Instance.
+| General Notes                                                    |
+|------------------------------------------------------------------|
+| Dates, times and durations are in ISO 8601 format                |
+| Dates and times are UTC                                          |
+| Strings use UTF-8 encoding                                       |
+| Primary keys are for internal use only                           |
+| Fields ending with "Ref" are UNIQUEque identifiers for external use |
+| A grid position of '0' is used for starting from the pitlane     |
+| Labels used in the positionText fields:                          |
+|   "D" - disqualified                                             |
+|   "E" - excluded                                                 |
+|   "F" - failed to qualify                                        |
+|   "N" - not classified                                           |
+|   "R" - retired                                                  |
+|   "W" - withdrew                                                 |
 
-### Do you have some example scripts?
+## Circuits table
 
-I could make some example scripts on how to use the database, but what would be the fun in that, the documentation above should give enough information to be able to write T-SQL queries. If you do need some help feel free to post a comment below or drop me an email and I will see if I can help you out.
+| Field      | Type         | Null | Key | Default | Extra          | Description               |
+|------------|--------------|------|-----|---------|----------------|---------------------------|
+| circuitId  | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key               |
+| circuitRef | varchar(255) | NO   |     |         |                | UNIQUEque circuit identifier |
+| name       | varchar(255) | NO   |     |         |                | Circuit name              |
+| location   | varchar(255) | YES  |     | NULL    |                | Location name             |
+| country    | varchar(255) | YES  |     | NULL    |                | Country name              |
+| lat        | float        | YES  |     | NULL    |                | Latitude                  |
+| lng        | float        | YES  |     | NULL    |                | Longitude                 |
+| alt        | int          | YES  |     | NULL    |                | Altitude (metres)         |
+| url        | varchar(255) | NO   | UNIQUE |         |                | Circuit Wikipedia page    |
+
+## constructor_results table
+
+| Field                | Type         | Null | Key | Default | Extra          | Description                            |
+|----------------------|--------------|------|-----|---------|----------------|----------------------------------------|
+| constructorResultsId | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                            |
+| raceId               | int          | NO   |     | 0       |                | Foreign key link to races table        |
+| constructorId        | int          | NO   |     | 0       |                | Foreign key link to constructors table |
+| points               | float        | YES  |     | NULL    |                | Constructor points for race            |
+| status               | varchar(255) | YES  |     | NULL    |                | "D" for disqualified (or null)         |
+
+## constructor_standings table
+
+| Field                  | Type         | Null | Key | Default | Extra          | Description                              |
+|------------------------|--------------|------|-----|---------|----------------|------------------------------------------|
+| constructorStandingsId | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                              |
+| raceId                 | int          | NO   |     | 0       |                | Foreign key link to races table          |
+| constructorId          | int          | NO   |     | 0       |                | Foreign key link to constructors table   |
+| points                 | float        | NO   |     | 0       |                | Constructor points for season            |
+| position               | int          | YES  |     | NULL    |                | Constructor standings position (integer) |
+| positionText           | varchar(255) | YES  |     | NULL    |                | Constructor standings position (string)  |
+| wins                   | int          | NO   |     | 0       |                | Season win count                         |
+
+## constructors table
+
+| Field          | Type         | Null | Key | Default | Extra          | Description                   |
+|----------------|--------------|------|-----|---------|----------------|-------------------------------|
+| constructorId  | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                   |
+| constructorRef | varchar(255) | NO   |     |         |                | UNIQUEque constructor identifier |
+| name           | varchar(255) | NO   | UNIQUE |         |                | Constructor name              |
+| nationality    | varchar(255) | YES  |     | NULL    |                | Constructor nationality       |
+| url            | varchar(255) | NO   |     |         |                | Constructor Wikipedia page    |
+
+## driver_standings table
+
+| Field             | Type         | Null | Key | Default | Extra          | Description                         |
+|-------------------|--------------|------|-----|---------|----------------|-------------------------------------|
+| driverStandingsId | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                         |
+| raceId            | int          | NO   |     | 0       |                | Foreign key link to races table     |
+| driverId          | int          | NO   |     | 0       |                | Foreign key link to drivers table   |
+| points            | float        | NO   |     | 0       |                | Driver points for season            |
+| position          | int          | YES  |     | NULL    |                | Driver standings position (integer) |
+| positionText      | varchar(255) | YES  |     | NULL    |                | Driver standings position (string)  |
+| wins              | int          | NO   |     | 0       |                | Season win count                    |
+
+## drivers table
+
+| Field       | Type         | Null | Key | Default | Extra          | Description              |
+|-------------|--------------|------|-----|---------|----------------|--------------------------|
+| driverId    | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key              |
+| driverRef   | varchar(255) | NO   |     |         |                | UNIQUEque driver identifier |
+| number      | int          | YES  |     | NULL    |                | Permanent driver number  |
+| code        | varchar(3)   | YES  |     | NULL    |                | Driver code e.g. "ALO"   |
+| forename    | varchar(255) | NO   |     |         |                | Driver forename          |
+| surname     | varchar(255) | NO   |     |         |                | Driver surname           |
+| dob         | date         | YES  |     | NULL    |                | Driver date of birth     |
+| nationality | varchar(255) | YES  |     | NULL    |                | Driver nationality       |
+| url         | varchar(255) | NO   | UNIQUE |         |                | Driver Wikipedia page    |
+
+## lap_times table
+
+| Field        | Type         | Null | Key | Default | Extra | Description                       |
+|--------------|--------------|------|-----|---------|-------|-----------------------------------|
+| raceId       | int          | NO   | PRI | NULL    |       | Foreign key link to races table   |
+| driverId     | int          | NO   | PRI | NULL    |       | Foreign key link to drivers table |
+| lap          | int          | NO   | PRI | NULL    |       | Lap number                        |
+| position     | int          | YES  |     | NULL    |       | Driver race position              |
+| time         | varchar(255) | YES  |     | NULL    |       | Lap time e.g. "1:43.762"          |
+| milliseconds | int          | YES  |     | NULL    |       | Lap time in milliseconds          |
+
+## pit_stops table
+
+| Field        | Type         | Null | Key | Default | Extra | Description                       |
+|--------------|--------------|------|-----|---------|-------|-----------------------------------|
+| raceId       | int          | NO   | PRI | NULL    |       | Foreign key link to races table   |
+| driverId     | int          | NO   | PRI | NULL    |       | Foreign key link to drivers table |
+| stop         | int          | NO   | PRI | NULL    |       | Stop number                       |
+| lap          | int          | NO   |     | NULL    |       | Lap number                        |
+| time         | time         | NO   |     | NULL    |       | Time of stop e.g. "13:52:25"      |
+| duration     | varchar(255) | YES  |     | NULL    |       | Duration of stop e.g. "21.783"    |
+| milliseconds | int          | YES  |     | NULL    |       | Duration of stop in milliseconds  |
+
+## qualifying table
+
+| Field         | Type         | Null | Key | Default | Extra          | Description                            |
+|---------------|--------------|------|-----|---------|----------------|----------------------------------------|
+| qualifyId     | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                            |
+| raceId        | int          | NO   |     | 0       |                | Foreign key link to races table        |
+| driverId      | int          | NO   |     | 0       |                | Foreign key link to drivers table      |
+| constructorId | int          | NO   |     | 0       |                | Foreign key link to constructors table |
+| number        | int          | NO   |     | 0       |                | Driver number                          |
+| position      | int          | YES  |     | NULL    |                | Qualifying position                    |
+| q1            | varchar(255) | YES  |     | NULL    |                | Q1 lap time e.g. "1:21.374"            |
+| q2            | varchar(255) | YES  |     | NULL    |                | Q2 lap time                            |
+| q3            | varchar(255) | YES  |     | NULL    |                | Q3 lap time                            |
+
+## races table
+
+| Field       | Type         | Null | Key | Default    | Extra          | Description                        |
+|-------------|--------------|------|-----|------------|----------------|------------------------------------|
+| raceId      | int          | NO   | PRI | NULL       | IDENTITY(1,1)  | Primary key                        |
+| year        | int          | NO   |     | 0          |                | Foreign key link to seasons table  |
+| round       | int          | NO   |     | 0          |                | Round number                       |
+| circuitId   | int          | NO   |     | 0          |                | Foreign key link to circuits table |
+| name        | varchar(255) | NO   |     |            |                | Race name                          |
+| date        | date         | NO   |     | 0000-00-00 |                | Race date e.g. "1950-05-13"        |
+| time        | time         | YES  |     | NULL       |                | Race start time e.g."13:00:00"     |
+| url         | varchar(255) | YES  | UNIQUE | NULL       |                | Race Wikipedia page                |
+| fp1_date    | date         | YES  |     | NULL       |                | FP1 date                           |
+| fp1_time    | time         | YES  |     | NULL       |                | FP1 start time                     |
+| fp2_date    | date         | YES  |     | NULL       |                | FP2 date                           |
+| fp2_time    | time         | YES  |     | NULL       |                | FP2 start time                     |
+| fp3_date    | date         | YES  |     | NULL       |                | FP3 date                           |
+| fp3_time    | time         | YES  |     | NULL       |                | FP3 start time                     |
+| quali_date  | date         | YES  |     | NULL       |                | Qualifying date                    |
+| quali_time  | time         | YES  |     | NULL       |                | Qualifying start time              |
+| sprint_date | date         | YES  |     | NULL       |                | Sprint date                        |
+| sprint_time | time         | YES  |     | NULL       |                | Sprint start time                  |
+
+## results table
+
+| Field           | Type         | Null | Key | Default | Extra          | Description                                 |
+|-----------------|--------------|------|-----|---------|----------------|---------------------------------------------|
+| resultId        | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                                 |
+| raceId          | int          | NO   |     | 0       |                | Foreign key link to races table             |
+| driverId        | int          | NO   |     | 0       |                | Foreign key link to drivers table           |
+| constructorId   | int          | NO   |     | 0       |                | Foreign key link to constructors table      |
+| number          | int          | YES  |     | NULL    |                | Driver number                               |
+| grid            | int          | NO   |     | 0       |                | Starting grid position                      |
+| position        | int          | YES  |     | NULL    |                | Official classification, if applicable      |
+| positionText    | varchar(255) | NO   |     |         |                | Driver position string e.g. "1" or "R"      |
+| positionOrder   | int          | NO   |     | 0       |                | Driver position for ordering purposes       |
+| points          | float        | NO   |     | 0       |                | Driver points for race                      |
+| laps            | int          | NO   |     | 0       |                | Number of completed laps                    |
+| time            | varchar(255) | YES  |     | NULL    |                | Finishing time or gap                       |
+| milliseconds    | int          | YES  |     | NULL    |                | Finishing time in milliseconds              |
+| fastestLap      | int          | YES  |     | NULL    |                | Lap number of fastest lap                   |
+| rank            | int          | YES  |     | 0       |                | Fastest lap rank, compared to other drivers |
+| fastestLapTime  | varchar(255) | YES  |     | NULL    |                | Fastest lap time e.g. "1:27.453"            |
+| fastestLapSpeed | varchar(255) | YES  |     | NULL    |                | Fastest lap speed (km/h) e.g. "213.874"     |
+| statusId        | int          | NO   |     | 0       |                | Foreign key link to status table            |
+
+## sprint_results table
+
+| Field           | Type         | Null | Key | Default | Extra          | Description                                 |
+|-----------------|--------------|------|-----|---------|----------------|---------------------------------------------|
+| sprintResultId  | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                                 |
+| raceId          | int          | NO   |     | 0       |                | Foreign key link to races table             |
+| driverId        | int          | NO   |     | 0       |                | Foreign key link to drivers table           |
+| constructorId   | int          | NO   |     | 0       |                | Foreign key link to constructors table      |
+| number          | int          | YES  |     | NULL    |                | Driver number                               |
+| grid            | int          | NO   |     | 0       |                | Starting grid position                      |
+| position        | int          | YES  |     | NULL    |                | Official classification, if applicable      |
+| positionText    | varchar(255) | NO   |     |         |                | Driver position string e.g. "1" or "R"      |
+| positionOrder   | int          | NO   |     | 0       |                | Driver position for ordering purposes       |
+| points          | float        | NO   |     | 0       |                | Driver points for race                      |
+| laps            | int          | NO   |     | 0       |                | Number of completed laps                    |
+| time            | varchar(255) | YES  |     | NULL    |                | Finishing time or gap                       |
+| milliseconds    | int          | YES  |     | NULL    |                | Finishing time in milliseconds              |
+| fastestLap      | int          | YES  |     | NULL    |                | Lap number of fastest lap                   |
+| fastestLapTime  | varchar(255) | YES  |     | NULL    |                | Fastest lap time e.g. "1:27.453"            |
+| statusId        | int          | NO   |     | 0       |                | Foreign key link to status table            |
+
+## seasons table
+
+| Field | Type         | Null | Key | Default | Extra | Description           |
+|-------|--------------|------|-----|---------|-------|-----------------------|
+| year  | int          | NO   | PRI | 0       |       | Primary key e.g. 1950 |
+| url   | varchar(255) | NO   | UNIQUE |         |       | Season Wikipedia page |
+
+## status table
+
+| Field    | Type         | Null | Key | Default | Extra          | Description                     |
+|----------|--------------|------|-----|---------|----------------|---------------------------------|
+| statusId | int          | NO   | PRI | NULL    | IDENTITY(1,1)  | Primary key                     |
+| status   | varchar(255) | NO   |     |         |                | Finishing status e.g. "Retired" |
