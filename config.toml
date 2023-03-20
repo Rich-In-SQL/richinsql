@@ -199,7 +199,7 @@ enable = true
 
 ######################## Tinyletter ###############################
 [params.tinyletter]
-enable = true
+enable = false
 
 ######################## call to action ###############################
 [params.cta]
