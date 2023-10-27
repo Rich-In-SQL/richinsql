@@ -123,6 +123,6 @@ The final code for this model can be downloaded from [GitHub](https://github.com
 
 ### Fiddle 
 
-If you would like to play around with the design, I have also created a [dbfiddle](dbfiddle.uk) which you can find below.
+If you would like to play around with the design, I have also created a [dbfiddle](https://dbfiddle.uk) which you can find below.
 
 https://dbfiddle.uk/srMDA4ZR
