@@ -1,6 +1,6 @@
 ---
 title: Building a basic e-commerce database
-date: 2023-11-27T18:30:00.000+01:00
+date: 2023-10-27T18:30:00.000+01:00
 author: Rich
 layout: post
 categories:
